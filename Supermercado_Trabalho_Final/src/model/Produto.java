@@ -1,6 +1,8 @@
 package model;
 
-class Produto {
+import enums.EnumProdutoTipo;
+
+public class Produto {
 
     private String nomeProduto;
     private int codProduto;

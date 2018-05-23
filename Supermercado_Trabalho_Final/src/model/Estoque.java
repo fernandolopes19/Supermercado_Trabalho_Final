@@ -20,7 +20,7 @@ public class Estoque {
     }
 
     public String mostraDadosProdutos() {
-        Iterator it = listaProduto.iterator();
+        Iterator<Produto> it = listaProduto.iterator();
 
         String dadosProdutos = "";
         Produto p;
@@ -37,7 +37,7 @@ public class Estoque {
     }
 
     public boolean isProdutoNoEstoque(String nomeProduto) {
-        Iterator it = listaProduto.iterator();
+        Iterator<Produto> it = listaProduto.iterator();
 
         boolean produtoNoEstoque = false;
         Produto p;
@@ -52,7 +52,7 @@ public class Estoque {
     }
 
     public boolean isProdutoNoEstoque(int codProduto) {
-        Iterator it = listaProduto.iterator();
+        Iterator<Produto> it = listaProduto.iterator();
 
         boolean produtoNoEstoque = false;
         Produto p;
@@ -67,7 +67,7 @@ public class Estoque {
     }
 
     public Produto retornaProduto(String nomeProduto) {
-        Iterator it = listaProduto.iterator();
+        Iterator<Produto> it = listaProduto.iterator();
 
         Produto p, produto = null;
         while (it.hasNext()) {
@@ -81,7 +81,7 @@ public class Estoque {
     }
 
     public Produto retornaProduto(int codProduto) {
-        Iterator it = listaProduto.iterator();
+        Iterator<Produto> it = listaProduto.iterator();
 
         Produto p, produto = null;
         while (it.hasNext()) {

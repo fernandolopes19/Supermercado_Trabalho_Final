@@ -2,16 +2,20 @@ package model;
 
 public class Caixa {
     
+	Supermercado mercado;
+	Leitor leitor;
     Balanca balanca;
-    Vendedor vendedor;
+    Funcionario vendedor;
 
     public Caixa() {
         balanca = new Balanca();
     }
 
-    public Caixa(Vendedor vendedor) {
+    public Caixa(Funcionario vendedor, Supermercado mercado) {
+    	this.mercado = mercado;
         this.vendedor = vendedor;
-        balanca = new Balanca();
+        this.balanca = new Balanca();
+        this.leitor = new Leitor(mercado.getEstoque());
     }
     
     public void atenderCliente(Cliente cliente){

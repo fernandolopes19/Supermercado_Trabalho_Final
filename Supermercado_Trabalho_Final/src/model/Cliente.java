@@ -3,16 +3,24 @@ package model;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Cliente extends Pessoa {
+import enums.EnumFormaPagamento;
 
-    private EnumFormaPagamento formaPagamento;
+public class Cliente extends Pessoa {
+	
+	private Carrinho carrinho;
+
+    public Cliente(String nome) {
+		super(nome);
+	}
+
+	private EnumFormaPagamento formaPagamento;
 
     public void consultaProdutoNoLeitor(Leitor leitor) {
         Scanner scInt = new Scanner(System.in);
         Scanner scStr = new Scanner(System.in);
         System.out.println("Consultar produto pelo Nome ou Código: "
                 + "\n1 - Nome"
-                + "\n2 - Códiigo");
+                + "\n2 - Codigo");
         int opcao = scInt.nextInt();
         switch(opcao){
             case 1:
@@ -26,9 +34,12 @@ public class Cliente extends Pessoa {
                 leitor.verificaPrecoProduto(codProduto);
                 break;
             default:
-                System.err.println("OPÇÃO DE CONSULTA DE PRODUTO INEXISTENTE");
+                System.err.println("OPCAO DE CONSULTA DE PRODUTO INEXISTENTE");
         }
+        scInt.close();
+        scStr.close();
     }
+    
     
     // TERMINAR
     public ArrayList<Produto> realizaCompra(Estoque estoque){
@@ -43,5 +54,15 @@ public class Cliente extends Pessoa {
     public void setFormaPagamento(EnumFormaPagamento formaPagamento) {
         this.formaPagamento = formaPagamento;
     }
+
+
+	public Carrinho getCarrinho() {
+		return carrinho;
+	}
+
+
+	public void setCarrinho(Carrinho carrinho) {
+		this.carrinho = carrinho;
+	}
 
 }
