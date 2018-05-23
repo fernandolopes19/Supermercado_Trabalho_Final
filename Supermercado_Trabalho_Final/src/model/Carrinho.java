@@ -6,212 +6,210 @@ import java.util.Scanner;
 
 public class Carrinho {
 
-    private ArrayList<Produto> listaProdutoDoCliente;
-    private Supermercado mercado;
+	private ArrayList<Produto> listaProdutoDoCliente;
+	private Supermercado mercado;
 
-    public Carrinho(Supermercado mercado) {
-        listaProdutoDoCliente = new ArrayList<>();
-        this.mercado = mercado;
-    }
+	public Carrinho(Supermercado mercado) {
+		listaProdutoDoCliente = new ArrayList<>();
+		this.mercado = mercado;
+	}
 
-    public void adicionarProdutoNoCarrinho() {
-        Scanner scInt = new Scanner(System.in);
-        Scanner scStr = new Scanner(System.in);
-        System.out.println("============    COMPRAS CLIENTE     =========="
-                + "\n" + "1 - Adicionar produto pelo nome do produto"
-                + "\n" + "2 - Adicionar produto pelo codigo do produto"
-                + "\n" + "3 - Ver estoque de produtos");
-        int opcaoCliente = scInt.nextInt();
+	public void adicionarProdutoNoCarrinho() {
+		Scanner scInt = new Scanner(System.in);
+		Scanner scStr = new Scanner(System.in);
+		System.out.println(
+				"============    COMPRAS CLIENTE     ==========" 
+						+ "\n" + "1 - Adicionar produto pelo nome do produto"
+						+ "\n" + "2 - Adicionar produto pelo codigo do produto" 
+						+ "\n" + "3 - Ver estoque de produtos");
+		int opcaoCliente = scInt.nextInt();
 
-        int qtdeProduto;
-        String nomeProduto;
-        int codProduto;
-        
-        Produto p = null;
-        switch (opcaoCliente) {
-            case 1:
-            	System.out.println("Nome do produto: ");
-            	nomeProduto = scStr.nextLine();
-            	if(mercado.getEstoque().isProdutoNoEstoque(nomeProduto)) {
-            		System.out.println("Quantidade: ");
-            		qtdeProduto = scInt.nextInt();
-            		p = mercado.retirarProdutoEstoque(nomeProduto, qtdeProduto);
-            		if(p != null) {
-            			this.listaProdutoDoCliente.add(p);
-            			
-            			codProduto = p.getCodProduto();
-            			int index = retornaIndexProdutoNoCarrinho(codProduto);
+		int qtdeProduto;
+		String nomeProduto;
+		int codProduto;
 
-            			if (isProdutoNoCarrinho(nomeProduto)) {
-            				this.listaProdutoDoCliente.get(index).adicionaQtdeProduto(qtdeProduto);
-            			} else {
-            				this.listaProdutoDoCliente.get(index).setQtdeProduto(qtdeProduto);
-            			}
-            		}
+		Produto p = null;
+		switch (opcaoCliente) {
+		case 1:
+			System.out.println("Nome do produto: ");
+			nomeProduto = scStr.nextLine();
+			if (mercado.getEstoque().isProdutoNoEstoque(nomeProduto)) {
+				System.out.println("Quantidade: ");
+				qtdeProduto = scInt.nextInt();
+				p = mercado.retirarProdutoEstoque(nomeProduto, qtdeProduto);
+				if (p != null) {
+					this.listaProdutoDoCliente.add(p);
 
-            	} else {
-            		System.err.println("NÃO EXISTE O PRODUTO NO ESTOQUE."
-            				+ " NÃO PODE ADICIONAR PRODUTO");
-            	}
-                break;
-            case 2:
-                System.out.println("Codigo do produto: ");
-                codProduto = scInt.nextInt();
-                if(mercado.getEstoque().isProdutoNoEstoque(codProduto)) {
-                	System.out.println("Quantidade: ");
-            		qtdeProduto = scInt.nextInt();
-                    p = mercado.retirarProdutoEstoque(codProduto, qtdeProduto);
-                    
-                	if (p != null) {
-            			this.listaProdutoDoCliente.add(p);
+					codProduto = p.getCodProduto();
+					int index = retornaIndexProdutoNoCarrinho(codProduto);
 
-                		int index = retornaIndexProdutoNoCarrinho(codProduto);
-                		if (isProdutoNoCarrinho(codProduto)) {
-                			this.listaProdutoDoCliente.get(index).adicionaQtdeProduto(qtdeProduto);
-                			
-                		} else {
-                			this.listaProdutoDoCliente.get(index).setQtdeProduto(qtdeProduto);
-                		}
-                	}
-                } else {
-                    System.err.println("NÃO EXISTE O PRODUTO NO ESTOQUE."
-                            + " NÃO PODE ADICIONAR PRODUTO");
-                }
-                break;
-            case 3:
-                System.out.println(mercado.getEstoque().mostraDadosProdutos());
-                break;
-            default:
-                System.err.println("OPCAO DE COMPRA DE PRODUTO INEXISTENTE.");
-        }
-        scStr.close();
-        scInt.close();
+					if (isProdutoNoCarrinho(nomeProduto)) {
+						this.listaProdutoDoCliente.get(index).adicionaQtdeProduto(qtdeProduto);
+					} else {
+						this.listaProdutoDoCliente.get(index).setQtdeProduto(qtdeProduto);
+					}
+				}
 
-    }
+			} else {
+				System.err.println("NÃO EXISTE O PRODUTO NO ESTOQUE." + " NÃO PODE ADICIONAR PRODUTO");
+			}
+			break;
+		case 2:
+			System.out.println("Codigo do produto: ");
+			codProduto = scInt.nextInt();
+			if (mercado.getEstoque().isProdutoNoEstoque(codProduto)) {
+				System.out.println("Quantidade: ");
+				qtdeProduto = scInt.nextInt();
+				p = mercado.retirarProdutoEstoque(codProduto, qtdeProduto);
 
-    public void retirarProdutoDoCarrinho() {
-        Scanner scInt = new Scanner(System.in);
-        Scanner scStr = new Scanner(System.in);
-        System.out.println("============    COMPRAS CLIENTE     =========="
-                + "\n" + "1 - Retirar produto pelo nome do produto"
-                + "\n" + "2 - Retirar produto pelo cÃ³digo do produto"
-                + "\n" + "3 - Ver estoque de produtos");
-        int opcaoCliente = scInt.nextInt();
+				if (p != null) {
+					this.listaProdutoDoCliente.add(p);
 
-        int qtdeProduto;
-        String nomeProduto;
-        int codProduto;
-        
-        Produto p = null;
-        switch (opcaoCliente) {
-            case 1:
-                System.out.println("Nome do produto: ");
-                nomeProduto = scStr.nextLine();
-               
-                if (this.isProdutoNoCarrinho(nomeProduto)) {
-                    System.out.println("Quantidade: ");
-                    qtdeProduto = scInt.nextInt();
+					int index = retornaIndexProdutoNoCarrinho(codProduto);
+					if (isProdutoNoCarrinho(codProduto)) {
+						this.listaProdutoDoCliente.get(index).adicionaQtdeProduto(qtdeProduto);
 
-                    this.mercado.retornarProdutoEstoque(nomeProduto, qtdeProduto);
+					} else {
+						this.listaProdutoDoCliente.get(index).setQtdeProduto(qtdeProduto);
+					}
+				}
+			} else {
+				System.err.println("NÃO EXISTE O PRODUTO NO ESTOQUE." + " NÃO PODE ADICIONAR PRODUTO");
+			}
+			break;
+		case 3:
+			System.out.println(mercado.getEstoque().mostraDadosProdutos());
+			break;
+		default:
+			System.err.println("OPCAO DE COMPRA DE PRODUTO INEXISTENTE.");
+		}
+		scStr.close();
+		scInt.close();
 
-                    codProduto = p.getCodProduto();
-                    int index = this.retornaIndexProdutoNoCarrinho(codProduto);
+	}
 
-                    if (qtdeProduto >= p.getQtdeProduto()) {
-                        this.listaProdutoDoCliente.remove(p);
-                    } else {
-                        this.listaProdutoDoCliente.get(index).removeQtdeProduto(qtdeProduto);
-                    }
+	public void retirarProdutoDoCarrinho() {
+		Scanner scInt = new Scanner(System.in);
+		Scanner scStr = new Scanner(System.in);
+		System.out.println(
+				"============    COMPRAS CLIENTE     ==========" + "\n" + "1 - Retirar produto pelo nome do produto"
+						+ "\n" + "2 - Retirar produto pelo cÃ³digo do produto" + "\n" + "3 - Ver estoque de produtos");
+		int opcaoCliente = scInt.nextInt();
 
-                } else {
-                    System.err.println("PRODUTO ESCOLHIDO NÃO PODE SER RETIRADO"
-                            + " PORQUE NÃO EXISTE ESSE PRODUTO NO CARRINHO");
-                }
-                break;
-            case 2:
-                System.out.println("Codigo do produto: ");
-                codProduto = scInt.nextInt();
-                
-                if (isProdutoNoCarrinho(codProduto)) {
-                    System.out.println("Quantidade: ");
-                    qtdeProduto = scInt.nextInt();
+		int qtdeProduto;
+		String nomeProduto;
+		int codProduto;
 
-                    this.mercado.retornarProdutoEstoque(codProduto, qtdeProduto);
-                    
-                    int index = retornaIndexProdutoNoCarrinho(codProduto);
+		Produto p = null;
+		switch (opcaoCliente) {
+		case 1:
+			System.out.println("Nome do produto: ");
+			nomeProduto = scStr.nextLine();
 
-                    if (qtdeProduto >= p.getQtdeProduto()) {
-                        this.listaProdutoDoCliente.remove(p);
-                    } else {
-                        this.listaProdutoDoCliente.get(index).removeQtdeProduto(qtdeProduto);
-                    }
-                }
-                break;
-            case 3:
-                System.out.println(this.mercado.getEstoque().mostraDadosProdutos());
-                break;
-            default:
-                System.err.println("OPCAO DE COMPRA DE PRODUTO INEXISTENTE.");
-        }
-        
-        scInt.close();
-        scStr.close();
+			if (this.isProdutoNoCarrinho(nomeProduto)) {
+				System.out.println("Quantidade: ");
+				qtdeProduto = scInt.nextInt();
 
-    }
+				this.mercado.retornarProdutoProEstoque(nomeProduto, qtdeProduto);
 
-    public boolean isProdutoNoCarrinho(String nomeProduto) {
-        Iterator it = listaProdutoDoCliente.iterator();
+				codProduto = p.getCodProduto();
+				int index = this.retornaIndexProdutoNoCarrinho(codProduto);
 
-        boolean produtoNoCarrinho = false;
-        Produto p;
-        while (it.hasNext()) {
-            p = (Produto) it.next();
-            if (p.getNomeProduto().equals(nomeProduto)) {
-                produtoNoCarrinho = true;
-            }
-        }
+				if (qtdeProduto >= p.getQtdeProduto()) {
+					this.listaProdutoDoCliente.remove(p);
+				} else {
+					this.listaProdutoDoCliente.get(index).removeQtdeProduto(qtdeProduto);
+				}
 
-        return produtoNoCarrinho;
-    }
+			} else {
+				System.err.println(
+						"PRODUTO ESCOLHIDO NÃO PODE SER RETIRADO" + " PORQUE NÃO EXISTE ESSE PRODUTO NO CARRINHO");
+			}
+			break;
+		case 2:
+			System.out.println("Codigo do produto: ");
+			codProduto = scInt.nextInt();
 
-    public boolean isProdutoNoCarrinho(int codProduto) {
-        Iterator it = listaProdutoDoCliente.iterator();
+			if (isProdutoNoCarrinho(codProduto)) {
+				System.out.println("Quantidade: ");
+				qtdeProduto = scInt.nextInt();
 
-        boolean produtoNoCarrinho = false;
-        Produto p;
-        while (it.hasNext()) {
-            p = (Produto) it.next();
-            if (p.getCodProduto() == codProduto) {
-                produtoNoCarrinho = true;
-            }
-        }
+				this.mercado.retornarProdutoProEstoque(codProduto, qtdeProduto);
 
-        return produtoNoCarrinho;
-    }
+				int index = retornaIndexProdutoNoCarrinho(codProduto);
 
-    public int retornaIndexProdutoNoCarrinho(int codProduto) {
-        Iterator it = listaProdutoDoCliente.iterator();
+				if (qtdeProduto >= p.getQtdeProduto()) {
+					this.listaProdutoDoCliente.remove(p);
+				} else {
+					this.listaProdutoDoCliente.get(index).removeQtdeProduto(qtdeProduto);
+				}
+			}
+			break;
+		case 3:
+			System.out.println(this.mercado.getEstoque().mostraDadosProdutos());
+			break;
+		default:
+			System.err.println("OPCAO DE COMPRA DE PRODUTO INEXISTENTE.");
+		}
 
-        int indexProdutoNoCarrinho = 0;
-        Produto p;
-        while (it.hasNext()) {
-            p = (Produto) it.next();
-            if (p.getCodProduto() == codProduto) {
-                indexProdutoNoCarrinho = listaProdutoDoCliente.indexOf(p);
-            }
-        }
+		scInt.close();
+		scStr.close();
 
-        return indexProdutoNoCarrinho;
-    }
+	}
 
-    public ArrayList<Produto> getListaProdutoDoCliente() {
-        return listaProdutoDoCliente;
-    }
-    
-    public void listarProdutos() {
-    	for(Produto p : this.listaProdutoDoCliente) {
-    		System.out.println(p.getNomeProduto());
-    	}
-    }
+	public boolean isProdutoNoCarrinho(String nomeProduto) {
+		Iterator it = listaProdutoDoCliente.iterator();
+
+		boolean produtoNoCarrinho = false;
+		Produto p;
+		while (it.hasNext()) {
+			p = (Produto) it.next();
+			if (p.getNomeProduto().equals(nomeProduto)) {
+				produtoNoCarrinho = true;
+			}
+		}
+
+		return produtoNoCarrinho;
+	}
+
+	public boolean isProdutoNoCarrinho(int codProduto) {
+		Iterator it = listaProdutoDoCliente.iterator();
+
+		boolean produtoNoCarrinho = false;
+		Produto p;
+		while (it.hasNext()) {
+			p = (Produto) it.next();
+			if (p.getCodProduto() == codProduto) {
+				produtoNoCarrinho = true;
+			}
+		}
+
+		return produtoNoCarrinho;
+	}
+
+	public int retornaIndexProdutoNoCarrinho(int codProduto) {
+		Iterator it = listaProdutoDoCliente.iterator();
+
+		int indexProdutoNoCarrinho = 0;
+		Produto p;
+		while (it.hasNext()) {
+			p = (Produto) it.next();
+			if (p.getCodProduto() == codProduto) {
+				indexProdutoNoCarrinho = listaProdutoDoCliente.indexOf(p);
+			}
+		}
+
+		return indexProdutoNoCarrinho;
+	}
+
+	public ArrayList<Produto> getListaProdutoDoCliente() {
+		return listaProdutoDoCliente;
+	}
+
+	public void listarProdutos() {
+		for (Produto p : this.listaProdutoDoCliente) {
+			System.out.println("Produto: " + p.getNomeProduto() + "\t" + "Quantidade: " + p.getQtdeProduto());
+		}
+	}
 
 }

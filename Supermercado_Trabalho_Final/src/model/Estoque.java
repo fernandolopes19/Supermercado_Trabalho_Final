@@ -28,8 +28,8 @@ public class Estoque {
             p = (Produto) it.next();
             dadosProdutos += "\n============="
                     + "\nNome: " + p.getNomeProduto()
-                    + "\t" + "CÃ³digo:" + p.getCodProduto()
-                    + "\t" + "PreÃ§o: R$" + p.getPrecoProduto()
+                    + "\t" + "Código:" + p.getCodProduto()
+                    + "\t" + "Preço: R$" + p.getPrecoProduto()
                     + "\t" + "Quantidade Estoque: " + p.getQtdeProduto();
         }
 

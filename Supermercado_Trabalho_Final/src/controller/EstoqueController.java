@@ -5,9 +5,10 @@ import model.Produto;
 
 public class EstoqueController {
 	
-	private Estoque est = new Estoque();
+	private Estoque estoque;
 
 	public EstoqueController() {
+		estoque = new Estoque();
 	}
 	
 	public Estoque inicializarEstoque() {
@@ -19,11 +20,11 @@ public class EstoqueController {
 		est.adicionaProduto(p1);
 		est.adicionaProduto(p2);
 
-		this.est = est;
+		this.estoque = est;
 		return est;
 	}
 
 	public Estoque getEstoque() {
-		return est;
+		return estoque;
 	}
 }

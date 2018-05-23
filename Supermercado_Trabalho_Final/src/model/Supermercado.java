@@ -107,7 +107,7 @@ public class Supermercado {
     	return produto;
     }
     
-    public boolean retornarProdutoEstoque(String nomeProduto, int qtdeProduto) {  
+    public boolean retornarProdutoProEstoque(String nomeProduto, int qtdeProduto) {  
          if (this.estoque.isProdutoNoEstoque(nomeProduto)) {        	 
              Produto produto = this.estoque.retornaProduto(nomeProduto);
 
@@ -120,7 +120,7 @@ public class Supermercado {
          return false;
     }
     
-    public boolean retornarProdutoEstoque(int codigo, int qtdeProduto) {
+    public boolean retornarProdutoProEstoque(int codigo, int qtdeProduto) {
     	if (this.estoque.isProdutoNoEstoque(codigo)) {
         	
     		Produto produto = this.estoque.retornaProduto(codigo);

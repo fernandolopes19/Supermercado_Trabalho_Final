@@ -10,14 +10,15 @@ import model.Leitor;
 import model.Supermercado;
 
 public class SupermercadoController {
-	private ArrayList<Supermercado> supermercados = new ArrayList<Supermercado>();
+	private ArrayList<Supermercado> supermercados;
 	
 	public SupermercadoController() {
+		supermercados = new ArrayList<Supermercado>();
 	}
 
-	public Supermercado inicializarSupermercado(String nome, Estoque estoque) {
+	public Supermercado inicializarSupermercado(String nomeSupermercado, Estoque estoque) {
 				
-		Supermercado mercado = new Supermercado(nome);
+		Supermercado mercado = new Supermercado(nomeSupermercado);
 		mercado.registrarEstoque(estoque);
 		
 		Funcionario f1 = new Funcionario("Funcionario 01", 1);
