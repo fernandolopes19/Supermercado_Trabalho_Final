@@ -33,5 +33,9 @@ public class Leitor {
             System.err.println("PRODUTO INEXISTENTE.");
         }
     }
+    
+    public double retornaPrecoProduto(Produto produto) {
+    	return produto.getPrecoProduto();
+    }
 
 }

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.function.Predicate;
 
+import enums.EnumProdutoTipo;
+
 public class Supermercado {
 
     private String nomeSupermercado;
@@ -43,7 +45,7 @@ public class Supermercado {
     public void registrarEstoque(Estoque estoque) {
     	this.estoque = estoque;
     }
-
+/*
     public void encomendaProdutoNovo() {
         Scanner scStr = new Scanner(System.in);
         Scanner scDouble = new Scanner(System.in);
@@ -62,8 +64,18 @@ public class Supermercado {
 
             System.out.println("Quantidade do Produto Adquirido: ");
             int qtdeProduto = scInt.nextInt();
+            
+            EnumProdutoTipo enumTipo = EnumProdutoTipo.UNITARIO;
+            System.out.println("Tipo (KG ou UN");
+            String tipo = scStr.nextLine();
+            if(tipo.toUpperCase().equals("KG")) {
+            	enumTipo = EnumProdutoTipo.POR_KG;
+            }
+            if(tipo.toUpperCase().equals("UN")) {
+            	enumTipo = EnumProdutoTipo.UNITARIO;
+            }
 
-            Produto produto = new Produto(nomeProduto, codProduto, precoProduto, qtdeProduto);
+            Produto produto = new Produto(nomeProduto, codProduto, precoProduto, qtdeProduto, enumTipo);
             estoque.adicionaProduto(produto);
         }
         
@@ -78,61 +90,26 @@ public class Supermercado {
         System.out.println("Nome do produto: ");
         String nomeProduto = sc.nextLine();
         if (this.estoque.isProdutoNoEstoque(nomeProduto)) {
-            Produto produto = this.estoque.retornaProduto(nomeProduto);
-
             System.out.println("Quantidade do Produto Adquirido: ");
             int qtdeProduto = sc.nextInt();
 
-            int indexProduto = this.estoque.getListaProduto().indexOf(produto);
-            this.estoque.getListaProduto().get(indexProduto).adicionaQtdeProduto(qtdeProduto);
+            this.estoque.retornarProdutoProEstoque(nomeProduto, qtdeProduto);
         }
         sc.close();
-    }
+    }*/
     
-    public Produto retirarProdutoEstoque(String nomeProduto, int qtdeProduto) {
-    	Produto produto = this.estoque.retornaProduto(nomeProduto);
-
-    	int indexProduto = this.estoque.getListaProduto().indexOf(produto);
-    	this.estoque.getListaProduto().get(indexProduto).removeQtdeProduto(qtdeProduto);
-    	
-    	return produto;
-    }
-    
-    public Produto retirarProdutoEstoque(int codigo, int qtdeProduto) {
-    	Produto produto = this.estoque.retornaProduto(codigo);
-
-    	int indexProduto = this.estoque.getListaProduto().indexOf(produto);
-    	this.estoque.getListaProduto().get(indexProduto).removeQtdeProduto(qtdeProduto);
-    	
-    	return produto;
-    }
-    
-    public boolean retornarProdutoProEstoque(String nomeProduto, int qtdeProduto) {  
-         if (this.estoque.isProdutoNoEstoque(nomeProduto)) {        	 
-             Produto produto = this.estoque.retornaProduto(nomeProduto);
-
-             int indexProduto = this.estoque.getListaProduto().indexOf(produto);
-             this.estoque.getListaProduto().get(indexProduto).adicionaQtdeProduto(qtdeProduto);
-             
-             return true;
-         }
-         
-         return false;
-    }
-    
-    public boolean retornarProdutoProEstoque(int codigo, int qtdeProduto) {
-    	if (this.estoque.isProdutoNoEstoque(codigo)) {
-        	
-    		Produto produto = this.estoque.retornaProduto(codigo);
-            
-    		int indexProduto = this.estoque.getListaProduto().indexOf(produto);
-    		this.estoque.getListaProduto().get(indexProduto).adicionaQtdeProduto(qtdeProduto);
-    
-    		return true;
+    public Caixa retornaCaixaDisponivel() {
+    	for(Caixa c : this.listaCaixas) {
+    		if(c.isDispoivel()) {
+    			return c;
+    		}
     	}
-    	
-    	return false;
+		return null;
     }
+    
+	public ArrayList<Caixa> getListaCaixas() {
+		return listaCaixas;
+	}
 
 	public String getNomeSupermercado() {
 		return nomeSupermercado;

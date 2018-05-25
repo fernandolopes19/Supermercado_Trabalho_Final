@@ -7,13 +7,16 @@ import enums.EnumFormaPagamento;
 
 public class Cliente extends Pessoa {
 
-	private EnumFormaPagamento formaPagamento;
-	private ArrayList<Produto> listaProdutos;
 	private Carrinho carrinho;
+	private double quantiaDinheiro;
 
 	public Cliente(String nome) {
 		super(nome);
-		listaProdutos = new ArrayList<>();
+	}
+	
+	public Cliente(String nome, double quantiaDinheiro) {
+		super(nome);
+		this.quantiaDinheiro = quantiaDinheiro;
 	}
 
 	public void consultaProdutoNoLeitor(Leitor leitor) {
@@ -39,20 +42,18 @@ public class Cliente extends Pessoa {
 		scStr.close();
 	}
 
-	// TERMINAR
-	public void realizaCompra(Supermercado mercado) {
+	public boolean realizaCompraDinheiro(double valorCompra, double valorPago) {
+		if(valorCompra > valorPago) {
+			return false;
+		} else {
+			double troco = valorPago - valorCompra;
+			System.out.println("Troco: " + troco);
+			return true;
+		}
 	}
-
-	public ArrayList<Produto> terminaCompra() {
-		return listaProdutos;
-	}
-
-	public EnumFormaPagamento getFormaPagamento() {
-		return formaPagamento;
-	}
-
-	public void setFormaPagamento(EnumFormaPagamento formaPagamento) {
-		this.formaPagamento = formaPagamento;
+	
+	public boolean realizarCompraCartao(double valorCompra) {
+		return true;
 	}
 
 	public Carrinho getCarrinho() {
@@ -61,6 +62,14 @@ public class Cliente extends Pessoa {
 
 	public void setCarrinho(Carrinho carrinho) {
 		this.carrinho = carrinho;
+	}
+
+	public double getQuantiaDinheiro() {
+		return quantiaDinheiro;
+	}
+
+	public void setQuantiaDinheiro(double quantiaDinheiro) {
+		this.quantiaDinheiro = quantiaDinheiro;
 	}
 
 }

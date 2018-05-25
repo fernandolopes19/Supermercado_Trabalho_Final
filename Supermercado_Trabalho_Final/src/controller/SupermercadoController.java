@@ -8,12 +8,13 @@ import model.Funcionario;
 import model.Gerente;
 import model.Leitor;
 import model.Supermercado;
+import model.Venda;
 
 public class SupermercadoController {
-	private ArrayList<Supermercado> supermercados;
+	private Supermercado supermercado;
 	
 	public SupermercadoController() {
-		supermercados = new ArrayList<Supermercado>();
+		
 	}
 
 	public Supermercado inicializarSupermercado(String nomeSupermercado, Estoque estoque) {
@@ -39,10 +40,32 @@ public class SupermercadoController {
 		//Caixa c2 = new Caixa(f2, mercado);
 		//Caixa c3 = new Caixa(f3, mercado);
 
-		mercado.registrarCaixa(new Caixa(f1, mercado));
-		mercado.registrarCaixa(new Caixa(f2, mercado));
-		mercado.registrarCaixa(new Caixa(f3, mercado));
+		mercado.registrarCaixa(new Caixa(f1, mercado, 1));
+		mercado.registrarCaixa(new Caixa(f2, mercado, 2));
+		mercado.registrarCaixa(new Caixa(f3, mercado, 3));
 
+		this.supermercado = mercado;
 		return mercado;
+	}
+	
+	public void gerarRelatorioCaixas() {
+		System.out.println("\nRelatorio dos caixas");
+
+		ArrayList<Caixa> caixas = this.supermercado.getListaCaixas();
+		double totalVendas = 0;
+
+		for(Caixa c : caixas) {
+			System.out.println("===============");
+			System.out.println("Caixa: " + c.getId());
+			ArrayList<Venda> vendas = c.getVendas();
+			for(Venda v : vendas) {
+				System.out.println("\nValor da venda: R$" + v.getValor());
+				System.out.println("Forma de pagamento: " + v.getFormaPagamento());
+				System.out.println("Responsavel: " + v.getResponsavel().getNome());
+				
+				totalVendas += v.getValor();
+			}
+		}
+		System.out.println("\nTotal de vendas: R$" + totalVendas);
 	}
 }

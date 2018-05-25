@@ -10,11 +10,16 @@ public class Produto {
     private int qtdeProduto;
     private EnumProdutoTipo tipoProduto;
 
-    public Produto(String nomeProduto, int codProduto, double precoProduto, int qtdeProdutoEstoque) {
+    public Produto() {
+    	
+    }
+    
+    public Produto(String nomeProduto, int codProduto, double precoProduto, int qtdeProdutoEstoque, EnumProdutoTipo tipo) {
         this.nomeProduto = nomeProduto;
         this.codProduto = codProduto;
         this.precoProduto = precoProduto;
         this.qtdeProduto = qtdeProdutoEstoque;
+        this.tipoProduto = tipo;
     }
 
     public void adicionaQtdeProduto(int qtdeProdutoAdicionada) {
