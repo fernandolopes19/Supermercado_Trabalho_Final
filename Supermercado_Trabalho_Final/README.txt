@@ -2,6 +2,8 @@ Alunos:
 - Lucas Fernandes Oliveira
 - Fernando Souza Lopes
 
-Passos para execução:
-- IDE para compilar código java.
+Passos para execuÃ§Ã£o:
+- IDE para compilar cÃ³digo java.
 - Executar a classe Main.
+
+O diagrama de classes se encontra dentro da pasta /docs
