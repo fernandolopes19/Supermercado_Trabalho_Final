@@ -1,9 +1,6 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.Scanner;
-
-import enums.EnumFormaPagamento;
 
 public class Cliente extends Pessoa {
 
@@ -38,8 +35,6 @@ public class Cliente extends Pessoa {
 		default:
 			System.err.println("OPCAO DE CONSULTA DE PRODUTO INEXISTENTE");
 		}
-		scInt.close();
-		scStr.close();
 	}
 
 	public boolean realizaCompraDinheiro(double valorCompra, double valorPago) {

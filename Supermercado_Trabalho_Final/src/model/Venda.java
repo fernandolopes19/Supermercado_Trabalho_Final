@@ -4,10 +4,10 @@ import enums.EnumFormaPagamento;
 
 public class Venda {
 	private double valor;
-	private Funcionario responsavel;
+	private Vendedor responsavel;
 	private EnumFormaPagamento formaPagamento;
 	
-	public Venda(double valor, Funcionario responsavel, EnumFormaPagamento formaPagamento) {
+	public Venda(double valor, Vendedor responsavel, EnumFormaPagamento formaPagamento) {
 		this.valor = valor;
 		this.responsavel = responsavel;
 		this.formaPagamento = formaPagamento;
@@ -19,10 +19,10 @@ public class Venda {
 	public void setValor(double valor) {
 		this.valor = valor;
 	}
-	public Funcionario getResponsavel() {
+	public Vendedor getResponsavel() {
 		return responsavel;
 	}
-	public void setResponsavel(Funcionario responsavel) {
+	public void setResponsavel(Vendedor responsavel) {
 		this.responsavel = responsavel;
 	}
 

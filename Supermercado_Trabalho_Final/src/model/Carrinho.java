@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 
+import enums.EnumProdutoTipo;
+
 public class Carrinho {
 
 	private ArrayList<Produto> listaProdutoDoCliente;
@@ -16,39 +18,67 @@ public class Carrinho {
 
 	public void adicionarProdutoNoCarrinho() {
 		Scanner scInt = new Scanner(System.in);
+		Scanner scDouble = new Scanner(System.in);
 		Scanner scStr = new Scanner(System.in);
 		System.out.println(
-				"============    COMPRAS CLIENTE     ==========" 
-						+ "\n" + "1 - Adicionar produto pelo nome do produto"
-						+ "\n" + "2 - Adicionar produto pelo codigo do produto" 
-						+ "\n" + "3 - Ver estoque de produtos");
+				"============    COMPRAS CLIENTE     ==========" + "\n" + "1 - Adicionar produto pelo nome do produto"
+						+ "\n" + "2 - Adicionar produto pelo codigo do produto" + "\n" + "3 - Ver estoque de produtos");
 		int opcaoCliente = scInt.nextInt();
 
 		int qtdeProduto;
+		double pesoProduto;
 		String nomeProduto;
 		int codProduto;
 		Produto p = new Produto();
-		
+
 		switch (opcaoCliente) {
 		case 1:
 			System.out.println("Nome do produto: ");
 			nomeProduto = scStr.nextLine();
 			if (estoque.isProdutoNoEstoque(nomeProduto)) {
-				System.out.println("Quantidade: ");
-				qtdeProduto = scInt.nextInt();
-				p = estoque.retirarProdutoEstoque(nomeProduto, qtdeProduto);
-				if (p != null) {
-					Produto produtoCliente = new Produto(p.getNomeProduto(), p.getCodProduto(), p.getPrecoProduto(), 0, p.getTipoProduto());
-					codProduto = p.getCodProduto();
+				p = estoque.retornaProduto(nomeProduto);
 
-					if (isProdutoNoCarrinho(nomeProduto)) {
-						int index = retornaIndexProdutoNoCarrinho(codProduto);
-						this.listaProdutoDoCliente.get(index).adicionaQtdeProduto(qtdeProduto);
-						
-					} else {
-						this.listaProdutoDoCliente.add(produtoCliente);
-						int index = retornaIndexProdutoNoCarrinho(codProduto);
-						this.listaProdutoDoCliente.get(index).setQtdeProduto(qtdeProduto);
+				if (p.getTipoProduto().equals(EnumProdutoTipo.UNITARIO)) {
+					System.out.println("Quantidade: ");
+					qtdeProduto = scInt.nextInt();
+					p = estoque.retirarProdutoEstoque(nomeProduto, qtdeProduto);
+
+					if (p != null) {
+						Produto produtoCliente = new Produto(p.getNomeProduto(), p.getCodProduto(), p.getPrecoProduto(),
+								0, p.getTipoProduto());
+						codProduto = p.getCodProduto();
+
+						if (isProdutoNoCarrinho(nomeProduto)) {
+							int index = retornaIndexProdutoNoCarrinho(codProduto);
+							this.listaProdutoDoCliente.get(index).adicionaQtdeProduto(qtdeProduto);
+
+						} else {
+							this.listaProdutoDoCliente.add(produtoCliente);
+							int index = retornaIndexProdutoNoCarrinho(codProduto);
+							this.listaProdutoDoCliente.get(index).setQtdeProduto(qtdeProduto);
+						}
+					}
+				}
+
+				if (p.getTipoProduto().equals(EnumProdutoTipo.POR_KG)) {
+					System.out.println("Peso (kg): ");
+					pesoProduto = scDouble.nextDouble();
+					p = estoque.retirarProdutoEstoque(nomeProduto, pesoProduto);
+
+					if (p != null) {
+						Produto produtoCliente = new Produto(p.getNomeProduto(), p.getCodProduto(), p.getPrecoProduto(),
+								pesoProduto, p.getTipoProduto());
+						codProduto = p.getCodProduto();
+
+						if (isProdutoNoCarrinho(nomeProduto)) {
+							int index = retornaIndexProdutoNoCarrinho(codProduto);
+							this.listaProdutoDoCliente.get(index).adicionaQtdeProduto(pesoProduto);
+
+						} else {
+							this.listaProdutoDoCliente.add(produtoCliente);
+							int index = retornaIndexProdutoNoCarrinho(codProduto);
+							this.listaProdutoDoCliente.get(index).setPesoProduto(pesoProduto);;
+						}
 					}
 				}
 
@@ -60,22 +90,48 @@ public class Carrinho {
 			System.out.println("Codigo do produto: ");
 			codProduto = scInt.nextInt();
 			if (estoque.isProdutoNoEstoque(codProduto)) {
-				System.out.println("Quantidade: ");
-				qtdeProduto = scInt.nextInt();
-				p = estoque.retirarProdutoEstoque(codProduto, qtdeProduto);
+				p = estoque.retornaProduto(codProduto);
 
-				if (p != null) {
-					Produto produtoCliente = new Produto(p.getNomeProduto(), p.getCodProduto(), p.getPrecoProduto(), 0, p.getTipoProduto());					
-					if (isProdutoNoCarrinho(codProduto)) {
-						int index = retornaIndexProdutoNoCarrinho(codProduto);
-						this.listaProdutoDoCliente.get(index).adicionaQtdeProduto(qtdeProduto);
+				if (p.getTipoProduto().equals(EnumProdutoTipo.UNITARIO)) {
+					System.out.println("Quantidade: ");
+					qtdeProduto = scInt.nextInt();
+					p = estoque.retirarProdutoEstoque(codProduto, qtdeProduto);
 
-					} else {
-						this.listaProdutoDoCliente.add(produtoCliente);
-						int index = retornaIndexProdutoNoCarrinho(codProduto);
-						this.listaProdutoDoCliente.get(index).setQtdeProduto(qtdeProduto);
+					if (p != null) {
+						Produto produtoCliente = new Produto(p.getNomeProduto(), p.getCodProduto(), p.getPrecoProduto(),
+								0, p.getTipoProduto());
+						if (isProdutoNoCarrinho(codProduto)) {
+							int index = retornaIndexProdutoNoCarrinho(codProduto);
+							this.listaProdutoDoCliente.get(index).adicionaQtdeProduto(qtdeProduto);
+
+						} else {
+							this.listaProdutoDoCliente.add(produtoCliente);
+							int index = retornaIndexProdutoNoCarrinho(codProduto);
+							this.listaProdutoDoCliente.get(index).setQtdeProduto(qtdeProduto);
+						}
 					}
 				}
+
+				if (p.getTipoProduto().equals(EnumProdutoTipo.POR_KG)) {
+					System.out.println("Peso (kg): ");
+					pesoProduto = scDouble.nextDouble();
+					p = estoque.retirarProdutoEstoque(codProduto, pesoProduto);
+
+					if (p != null) {
+						Produto produtoCliente = new Produto(p.getNomeProduto(), p.getCodProduto(), p.getPrecoProduto(),
+								0, p.getTipoProduto());
+						if (isProdutoNoCarrinho(codProduto)) {
+							int index = retornaIndexProdutoNoCarrinho(codProduto);
+							this.listaProdutoDoCliente.get(index).adicionaQtdeProduto(pesoProduto);
+
+						} else {
+							this.listaProdutoDoCliente.add(produtoCliente);
+							int index = retornaIndexProdutoNoCarrinho(codProduto);
+							this.listaProdutoDoCliente.get(index).setPesoProduto(pesoProduto);
+						}
+					}
+				}
+
 			} else {
 				System.err.println("NÃO EXISTE O PRODUTO NO ESTOQUE." + " NÃO PODE ADICIONAR PRODUTO");
 			}
@@ -86,20 +142,22 @@ public class Carrinho {
 		default:
 			System.err.println("OPCAO DE COMPRA DE PRODUTO INEXISTENTE.");
 		}
-		//scStr.close();
-		//scInt.close();
+		// scStr.close();
+		// scInt.close();
 
 	}
 
 	public void retirarProdutoDoCarrinho() {
 		Scanner scInt = new Scanner(System.in);
+		Scanner scDouble = new Scanner(System.in);
 		Scanner scStr = new Scanner(System.in);
 		System.out.println(
 				"============    COMPRAS CLIENTE     ==========" + "\n" + "1 - Retirar produto pelo nome do produto"
-						+ "\n" + "2 - Retirar produto pelo cÃ³digo do produto" + "\n" + "3 - Ver estoque de produtos");
+						+ "\n" + "2 - Retirar produto pelo código do produto" + "\n" + "3 - Ver estoque de produtos");
 		int opcaoCliente = scInt.nextInt();
 
 		int qtdeProduto;
+		double pesoProduto;
 		String nomeProduto;
 		int codProduto;
 
@@ -110,19 +168,32 @@ public class Carrinho {
 			nomeProduto = scStr.nextLine();
 
 			if (this.isProdutoNoCarrinho(nomeProduto)) {
-				System.out.println("Quantidade: ");
-				qtdeProduto = scInt.nextInt();
-
-				this.estoque.retornarProdutoProEstoque(nomeProduto, qtdeProduto);
 				int index = this.retornaIndexProdutoNoCarrinho(nomeProduto);
-				
 				p = this.listaProdutoDoCliente.get(index);
 				codProduto = p.getCodProduto();
 
-				if (qtdeProduto >= p.getQtdeProduto()) {
-					this.listaProdutoDoCliente.remove(p);
-				} else {
-					this.listaProdutoDoCliente.get(index).removeQtdeProduto(qtdeProduto);
+				if (p.getTipoProduto().equals(EnumProdutoTipo.UNITARIO)) {
+					System.out.println("Quantidade: ");
+					qtdeProduto = scInt.nextInt();
+
+					this.estoque.retornarProdutoProEstoque(nomeProduto, qtdeProduto);
+					if (qtdeProduto >= p.getQtdeProduto()) {
+						this.listaProdutoDoCliente.remove(p);
+					} else {
+						this.listaProdutoDoCliente.get(index).removeQtdeProduto(qtdeProduto);
+					}
+				}
+
+				if (p.getTipoProduto().equals(EnumProdutoTipo.POR_KG)) {
+					System.out.println("Peso (kg): ");
+					pesoProduto = scDouble.nextDouble();
+
+					this.estoque.retornarProdutoProEstoque(nomeProduto, pesoProduto);
+					if (pesoProduto >= p.getPesoProduto()) {
+						this.listaProdutoDoCliente.remove(p);
+					} else {
+						this.listaProdutoDoCliente.get(index).removeQtdeProduto(pesoProduto);
+					}
 				}
 
 			} else {
@@ -135,19 +206,35 @@ public class Carrinho {
 			codProduto = scInt.nextInt();
 
 			if (isProdutoNoCarrinho(codProduto)) {
-				System.out.println("Quantidade: ");
-				qtdeProduto = scInt.nextInt();
-
-				this.estoque.retornarProdutoProEstoque(codProduto, qtdeProduto);
-
 				int index = retornaIndexProdutoNoCarrinho(codProduto);
 				p = this.listaProdutoDoCliente.get(index);
-				
-				if (qtdeProduto >= p.getQtdeProduto()) {
-					this.listaProdutoDoCliente.remove(p);
-				} else {
-					this.listaProdutoDoCliente.get(index).removeQtdeProduto(qtdeProduto);
+
+				if (p.getTipoProduto().equals(EnumProdutoTipo.UNITARIO)) {
+					System.out.println("Quantidade: ");
+					qtdeProduto = scInt.nextInt();
+
+					this.estoque.retornarProdutoProEstoque(codProduto, qtdeProduto);
+
+					if (qtdeProduto >= p.getQtdeProduto()) {
+						this.listaProdutoDoCliente.remove(p);
+					} else {
+						this.listaProdutoDoCliente.get(index).removeQtdeProduto(qtdeProduto);
+					}
 				}
+
+				if (p.getTipoProduto().equals(EnumProdutoTipo.POR_KG)) {
+					System.out.println("Peso: ");
+					pesoProduto = scDouble.nextDouble();
+
+					this.estoque.retornarProdutoProEstoque(codProduto, pesoProduto);
+
+					if (pesoProduto >= p.getPesoProduto()) {
+						this.listaProdutoDoCliente.remove(p);
+					} else {
+						this.listaProdutoDoCliente.get(index).removeQtdeProduto(pesoProduto);
+					}
+				}
+
 			}
 			break;
 		case 3:
@@ -156,9 +243,6 @@ public class Carrinho {
 		default:
 			System.err.println("OPCAO DE COMPRA DE PRODUTO INEXISTENTE.");
 		}
-
-		scInt.close();
-		scStr.close();
 
 	}
 
@@ -206,7 +290,7 @@ public class Carrinho {
 
 		return indexProdutoNoCarrinho;
 	}
-	
+
 	public int retornaIndexProdutoNoCarrinho(String nome) {
 		Iterator it = listaProdutoDoCliente.iterator();
 
@@ -221,7 +305,6 @@ public class Carrinho {
 
 		return indexProdutoNoCarrinho;
 	}
-	
 
 	public ArrayList<Produto> getListaProdutoDoCliente() {
 		return listaProdutoDoCliente;
@@ -229,7 +312,13 @@ public class Carrinho {
 
 	public void listarProdutos() {
 		for (Produto p : this.listaProdutoDoCliente) {
-			System.out.println("Produto: " + p.getNomeProduto() + "\t" + "Quantidade: " + p.getQtdeProduto());
+			if (p.getTipoProduto().equals(EnumProdutoTipo.UNITARIO)) {
+				System.out.println("Produto: " + p.getNomeProduto() + "\t" + "Quantidade: " + p.getQtdeProduto());
+			}
+			if (p.getTipoProduto().equals(EnumProdutoTipo.UNITARIO)) {
+				System.out.println("Produto: " + p.getNomeProduto() + "\t" + "Peso: " + p.getPesoProduto() + "kg");
+			}
+
 		}
 	}
 

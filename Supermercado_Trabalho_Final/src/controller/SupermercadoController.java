@@ -9,6 +9,7 @@ import model.Gerente;
 import model.Leitor;
 import model.Supermercado;
 import model.Venda;
+import model.Vendedor;
 
 public class SupermercadoController {
 	private Supermercado supermercado;
@@ -22,27 +23,27 @@ public class SupermercadoController {
 		Supermercado mercado = new Supermercado(nomeSupermercado);
 		mercado.registrarEstoque(estoque);
 		
-		Funcionario f1 = new Funcionario("Funcionario 01", 1);
-		Funcionario f2 = new Funcionario("Funcionario 02", 2);
-		Funcionario f3 = new Funcionario("Funcionario 03", 3);
-		Funcionario f4 = new Funcionario("Funcionario 04", 4);
-		Funcionario f5 = new Funcionario("Funcionario 05", 5);
+		Vendedor v1 = new Vendedor("Vendedor 01", 1);
+		Vendedor v2 = new Vendedor("Vendedor 02", 2);
+		Vendedor v3 = new Vendedor("Vendedor 03", 3);
+		Vendedor v4 = new Vendedor("Vendedor 04", 4);
+		Vendedor v5 = new Vendedor("Vendedor 05", 5);
 		Gerente g1 = new Gerente("Gerente", 6, "Comercial");
 		
-		mercado.addFuncionario(f1);
-		mercado.addFuncionario(f2);
-		mercado.addFuncionario(f3);
-		mercado.addFuncionario(f4);
-		mercado.addFuncionario(f5);
+		mercado.addFuncionario(v1);
+		mercado.addFuncionario(v2);
+		mercado.addFuncionario(v3);
+		mercado.addFuncionario(v4);
+		mercado.addFuncionario(v5);
 		mercado.addFuncionario(g1);
 		
 		//Caixa c1 = new Caixa(f1, mercado);
 		//Caixa c2 = new Caixa(f2, mercado);
 		//Caixa c3 = new Caixa(f3, mercado);
 
-		mercado.registrarCaixa(new Caixa(f1, mercado, 1));
-		mercado.registrarCaixa(new Caixa(f2, mercado, 2));
-		mercado.registrarCaixa(new Caixa(f3, mercado, 3));
+		mercado.registrarCaixa(new Caixa(v1, mercado, 1));
+		mercado.registrarCaixa(new Caixa(v2, mercado, 2));
+		mercado.registrarCaixa(new Caixa(v3, mercado, 3));
 
 		this.supermercado = mercado;
 		return mercado;
