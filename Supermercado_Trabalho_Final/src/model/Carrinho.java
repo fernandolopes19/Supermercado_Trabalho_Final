@@ -21,8 +21,10 @@ public class Carrinho {
 		Scanner scDouble = new Scanner(System.in);
 		Scanner scStr = new Scanner(System.in);
 		System.out.println(
-				"============    COMPRAS CLIENTE     ==========" + "\n" + "1 - Adicionar produto pelo nome do produto"
-						+ "\n" + "2 - Adicionar produto pelo codigo do produto" + "\n" + "3 - Ver estoque de produtos");
+				"============    COMPRAS CLIENTE     ==========" 
+						+ "\n1 - Adicionar produto pelo nome do produto"
+						+ "\n2 - Adicionar produto pelo codigo do produto" 
+						+ "\n3 - Ver estoque de produtos");
 		int opcaoCliente = scInt.nextInt();
 
 		int qtdeProduto;
@@ -44,18 +46,14 @@ public class Carrinho {
 					p = estoque.retirarProdutoEstoque(nomeProduto, qtdeProduto);
 
 					if (p != null) {
-						Produto produtoCliente = new Produto(p.getNomeProduto(), p.getCodProduto(), p.getPrecoProduto(),
-								0, p.getTipoProduto());
 						codProduto = p.getCodProduto();
 
 						if (isProdutoNoCarrinho(nomeProduto)) {
 							int index = retornaIndexProdutoNoCarrinho(codProduto);
-							this.listaProdutoDoCliente.get(index).adicionaQtdeProduto(qtdeProduto);
+							this.listaProdutoDoCliente.get(index).adicionaQtdeProduto(p.getQtdeProduto());
 
 						} else {
-							this.listaProdutoDoCliente.add(produtoCliente);
-							int index = retornaIndexProdutoNoCarrinho(codProduto);
-							this.listaProdutoDoCliente.get(index).setQtdeProduto(qtdeProduto);
+							this.listaProdutoDoCliente.add(p);
 						}
 					}
 				}
@@ -66,18 +64,14 @@ public class Carrinho {
 					p = estoque.retirarProdutoEstoque(nomeProduto, pesoProduto);
 
 					if (p != null) {
-						Produto produtoCliente = new Produto(p.getNomeProduto(), p.getCodProduto(), p.getPrecoProduto(),
-								pesoProduto, p.getTipoProduto());
 						codProduto = p.getCodProduto();
 
 						if (isProdutoNoCarrinho(nomeProduto)) {
 							int index = retornaIndexProdutoNoCarrinho(codProduto);
-							this.listaProdutoDoCliente.get(index).adicionaQtdeProduto(pesoProduto);
+							this.listaProdutoDoCliente.get(index).adicionaQtdeProduto(p.getQtdeProduto());
 
 						} else {
-							this.listaProdutoDoCliente.add(produtoCliente);
-							int index = retornaIndexProdutoNoCarrinho(codProduto);
-							this.listaProdutoDoCliente.get(index).setPesoProduto(pesoProduto);;
+							this.listaProdutoDoCliente.add(p);
 						}
 					}
 				}
@@ -142,9 +136,6 @@ public class Carrinho {
 		default:
 			System.err.println("OPCAO DE COMPRA DE PRODUTO INEXISTENTE.");
 		}
-		// scStr.close();
-		// scInt.close();
-
 	}
 
 	public void retirarProdutoDoCarrinho() {
@@ -315,7 +306,7 @@ public class Carrinho {
 			if (p.getTipoProduto().equals(EnumProdutoTipo.UNITARIO)) {
 				System.out.println("Produto: " + p.getNomeProduto() + "\t" + "Quantidade: " + p.getQtdeProduto());
 			}
-			if (p.getTipoProduto().equals(EnumProdutoTipo.UNITARIO)) {
+			if (p.getTipoProduto().equals(EnumProdutoTipo.POR_KG)) {
 				System.out.println("Produto: " + p.getNomeProduto() + "\t" + "Peso: " + p.getPesoProduto() + "kg");
 			}
 

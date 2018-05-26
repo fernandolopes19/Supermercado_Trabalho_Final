@@ -112,11 +112,21 @@ public class Estoque {
 	 */
 	public Produto retirarProdutoEstoque(String nomeProduto, int qtdeProduto) {
 		Produto produto = this.retornaProduto(nomeProduto);
+		Produto produtoCliente = null;
+		if(produto != null) {
+			int indexProduto = this.getListaProduto().indexOf(produto);
+			if(produto.getTipoProduto() == EnumProdutoTipo.UNITARIO) {
+				if(produto.getQtdeProduto() < qtdeProduto) {
+					qtdeProduto = produto.getQtdeProduto();
+					this.getListaProduto().get(indexProduto).removeQtdeProduto(produto.getQtdeProduto());
+				} else {
+					this.getListaProduto().get(indexProduto).removeQtdeProduto(qtdeProduto);
+				}
+			} 
+			produtoCliente = new Produto(produto.getNomeProduto(), produto.getCodProduto(), produto.getPrecoProduto(), qtdeProduto, produto.getTipoProduto());
+		}
 
-		int indexProduto = this.getListaProduto().indexOf(produto);
-		this.getListaProduto().get(indexProduto).removeQtdeProduto(qtdeProduto);
-
-		return produto;
+		return produtoCliente;
 	}
 
 	/**
@@ -128,11 +138,22 @@ public class Estoque {
 	 */
 	public Produto retirarProdutoEstoque(String nomeProduto, double pesoProduto) {
 		Produto produto = this.retornaProduto(nomeProduto);
+		Produto produtoCliente = null;
+		
+		if(produto != null) {
+			int indexProduto = this.getListaProduto().indexOf(produto);
+			if(produto.getTipoProduto() == EnumProdutoTipo.POR_KG) {
+				if(produto.getPesoProduto() < pesoProduto) {
+					pesoProduto = produto.getPesoProduto();
+					this.getListaProduto().get(indexProduto).removeQtdeProduto(produto.getPesoProduto());
+				} else {
+					this.getListaProduto().get(indexProduto).removeQtdeProduto(pesoProduto);
+				}
+			}
+			produtoCliente = new Produto(produto.getNomeProduto(), produto.getCodProduto(), produto.getPrecoProduto(), pesoProduto, produto.getTipoProduto());
+		}
 
-		int indexProduto = this.getListaProduto().indexOf(produto);
-		this.getListaProduto().get(indexProduto).removeQtdeProduto(pesoProduto);
-
-		return produto;
+		return produtoCliente;
 	}
 
 	/**
@@ -145,11 +166,22 @@ public class Estoque {
 	 */
 	public Produto retirarProdutoEstoque(int codigo, int qtdeProduto) {
 		Produto produto = this.retornaProduto(codigo);
+		Produto produtoCliente = null;
 
-		int indexProduto = this.getListaProduto().indexOf(produto);
-		this.getListaProduto().get(indexProduto).removeQtdeProduto(qtdeProduto);
+		if(produto != null) {
+			int indexProduto = this.getListaProduto().indexOf(produto);
+			if(produto.getTipoProduto() == EnumProdutoTipo.UNITARIO) {
+				if(produto.getQtdeProduto() < qtdeProduto) {
+					qtdeProduto = produto.getQtdeProduto();
+					this.getListaProduto().get(indexProduto).removeQtdeProduto(produto.getQtdeProduto());
+				} else {
+					this.getListaProduto().get(indexProduto).removeQtdeProduto(qtdeProduto);
+				}
+			}
+			produtoCliente = new Produto(produto.getNomeProduto(), produto.getCodProduto(), produto.getPrecoProduto(), qtdeProduto, produto.getTipoProduto());
+		}
 
-		return produto;
+		return produtoCliente;
 	}
 
 	/**
@@ -161,9 +193,20 @@ public class Estoque {
 	 */
 	public Produto retirarProdutoEstoque(int codigo, double pesoProduto) {
 		Produto produto = this.retornaProduto(codigo);
+		Produto produtoCliente = null;
 
-		int indexProduto = this.getListaProduto().indexOf(produto);
-		this.getListaProduto().get(indexProduto).removeQtdeProduto(pesoProduto);
+		if(produto != null) {
+			int indexProduto = this.getListaProduto().indexOf(produto);
+			if(produto.getTipoProduto() == EnumProdutoTipo.POR_KG) {
+				if(produto.getPesoProduto() < pesoProduto) {
+					pesoProduto = produto.getPesoProduto();
+					this.getListaProduto().get(indexProduto).removeQtdeProduto(produto.getPesoProduto());
+				} else {
+					this.getListaProduto().get(indexProduto).removeQtdeProduto(pesoProduto);
+				}
+			}
+			produtoCliente = new Produto(produto.getNomeProduto(), produto.getCodProduto(), produto.getPrecoProduto(), pesoProduto, produto.getTipoProduto());
+		}
 
 		return produto;
 	}

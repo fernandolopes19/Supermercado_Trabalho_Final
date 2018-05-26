@@ -23,10 +23,14 @@ public class EstoqueController {
 		Produto p1 = new Produto("Refrigerante", 1, 6.5, 10, EnumProdutoTipo.UNITARIO);
 		Produto p2 = new Produto("Leite", 2, 2, 21, EnumProdutoTipo.UNITARIO);
 		Produto p3 = new Produto("Carne", 3, 16.9, 10.0, EnumProdutoTipo.POR_KG);
+		Produto p4 = new Produto("Batata", 4, 7.5, 120.0, EnumProdutoTipo.POR_KG);
+		Produto p5 = new Produto("Bolacha", 5, 1.9, 200, EnumProdutoTipo.UNITARIO);
 
 		est.adicionaProduto(p1);
 		est.adicionaProduto(p2);
 		est.adicionaProduto(p3);
+		est.adicionaProduto(p4);
+		est.adicionaProduto(p5);
 
 		this.estoque = est;
 		this.gerarRelatorioInicioDia();
@@ -170,7 +174,6 @@ public class EstoqueController {
 			}
 
 		}
-		System.out.println("Até aqui OK");
 		
 	}
 }

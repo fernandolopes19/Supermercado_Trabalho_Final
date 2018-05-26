@@ -86,6 +86,7 @@ public class Caixa {
 			break;
 		}
 
+		cliente.setCarrinho(new Carrinho(this.mercado.getEstoque()));
 		this.isDispoivel = true;
 	}
 

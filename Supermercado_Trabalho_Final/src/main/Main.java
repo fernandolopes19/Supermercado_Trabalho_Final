@@ -33,7 +33,7 @@ public class Main {
 			switch (opcaoMenu) {
 			case 1:
 				clientMenu: while (true) {
-					System.out.print("\n\n\n");
+					System.out.print("\n\n");
 					System.out.println("Ola, " + c1.getNome() + ". Selecione uma acao:");
 					System.out.println("1 - Adicionar produto" + "\n2 - Ver carrinho" +  "\n3 - Pagar" + "\n0 - Sair");
 					opcao = scInt.nextInt();
@@ -70,7 +70,7 @@ public class Main {
 							+ "\n2 - Gerar relatorio final do dia (estoque)"
 							+ "\n3 - Exibir relatorio do estoque" 
 							+ "\n4 - Encomendar produto novo" 
-							+ "\n5 - Encomendar produto já existente (ERRO)" 
+							+ "\n5 - Encomendar produto já existente " 
 							+ "\n6 - Realocar caixa"
 							+ "\n0 - Sair");
 					opcao = scInt.nextInt();
@@ -102,7 +102,10 @@ public class Main {
 						break;
 					}
 				}
-			
+			break;
+			case 0:
+				statusMenu = false;
+				break;
 			default:
 				break;
 			}
