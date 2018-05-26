@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import model.Caixa;
 import model.Estoque;
@@ -68,5 +69,77 @@ public class SupermercadoController {
 			}
 		}
 		System.out.println("\nTotal de vendas: R$" + totalVendas);
+	}
+	
+	public void realocarVendedorCaixa() {
+		Vendedor vendedorSelecionado = null;
+		Caixa caixaSelecionado = null;
+		
+		ArrayList<Caixa> caixas = this.supermercado.getListaCaixas();
+		ArrayList<Funcionario> funcionarios = this.supermercado.getFuncionarios();
+
+		System.out.println("Digite o codigo do funcionario: ");
+		for(Funcionario f : funcionarios) {
+			if(f instanceof Vendedor) {
+				System.out.println("Codigo: " + f.getIdFuncionario() + " / Nome: " + f.getNome());
+			}
+		}
+		
+		Scanner sc = new Scanner(System.in);
+		int codigoVendedor;
+		selectFunc: while(true) {
+			codigoVendedor = sc.nextInt();
+			for(int i = 0; i < funcionarios.size(); i++) {
+				if(funcionarios.get(i).getIdFuncionario() == codigoVendedor) {
+					vendedorSelecionado = (Vendedor) funcionarios.get(i);
+					break;
+				}
+			}
+			if(vendedorSelecionado != null) {
+				boolean caixaOperado = false;
+				for(Caixa c : caixas) {
+					if(c.getVendedor().getIdFuncionario() == vendedorSelecionado.getIdFuncionario()) {
+						System.out.println("Este vendedor ja esta operando um caixa. Selecione outro: ");
+						caixaOperado = true;
+						break;
+					} else {
+						caixaOperado = false;
+					}
+				}
+				if(!caixaOperado) {
+					break selectFunc;
+				}
+			} else {
+				System.out.println("Codigo invalido. Digite novamente: ");
+			}
+		}
+		
+		System.out.println("Digite o codigo do caixa: ");
+		for(Caixa c : caixas) {
+			System.out.println("Codigo: " + c.getId());
+		}
+		
+		selectCaixa: while(true) {
+			int codigoCaixa = sc.nextInt();
+			for(Caixa c : caixas) {
+				if(c.getId() == codigoCaixa) {
+					caixaSelecionado = c;
+				}
+
+				if(c.getVendedor().equals(vendedorSelecionado)) {
+					c.setVendedor(null);
+				}
+			}
+			if(caixaSelecionado != null) {
+				caixaSelecionado.setVendedor(vendedorSelecionado);
+				break selectCaixa;
+			} else {
+				System.out.println("Codigo invalido. Digite novamente: ");
+			}
+		}
+		
+		for(Caixa c : caixas) {
+			c.exibirCaixa();
+		}
 	}
 }

@@ -42,6 +42,10 @@ public class Supermercado {
     	this.listaFuncionarios.removeIf(funcPredicate);
     }
     
+    public ArrayList<Funcionario> getFuncionarios() {
+    	return this.listaFuncionarios;
+    }
+    
     public void registrarEstoque(Estoque estoque) {
     	this.estoque = estoque;
     }

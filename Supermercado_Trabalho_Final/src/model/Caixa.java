@@ -109,4 +109,17 @@ public class Caixa {
 		this.id = id;
 	}
 
+	public Vendedor getVendedor() {
+		return vendedor;
+	}
+
+	public void setVendedor(Vendedor vendedor) {
+		this.vendedor = vendedor;
+	}
+	
+	public void exibirCaixa() {
+		System.out.println("\nCodigo: " + this.id);
+		System.out.println("Vendedor: " + this.vendedor.getNome());
+	}
+
 }

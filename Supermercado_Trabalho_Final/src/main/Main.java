@@ -24,7 +24,7 @@ public class Main {
 		Gerente g1 = new Gerente("Gerente 01", 1, "Comercial", spControl, stqControl);
 
 		Scanner scInt = new Scanner(System.in);
-		int opcao = 0;
+		int opcao;
 		int opcaoMenu;
 		boolean statusMenu = true;
 		while (statusMenu) {
@@ -66,12 +66,14 @@ public class Main {
 				gerenteMenu: while (true) {
 					System.out.print("\n\n\n");
 					System.out.println("Ola, " + g1.getNome() + ". Selecione uma acao:");
-					System.out.println("1 - Gerar relatorio dos caixas" + "\n2 - Gerar relatorio final do dia (estoque)"
-							+ "\n3 - Exibir relatorio do estoque" + "\n4 - Encomendar produto novo" + "\n5 - Encomendar produto já existente (ERRO)" + "\n0 - Sair");
-					if (scInt.hasNextInt()) {
-						opcao = scInt.nextInt();
-					}
-
+					System.out.println("1 - Gerar relatorio dos caixas" 
+							+ "\n2 - Gerar relatorio final do dia (estoque)"
+							+ "\n3 - Exibir relatorio do estoque" 
+							+ "\n4 - Encomendar produto novo" 
+							+ "\n5 - Encomendar produto já existente (ERRO)" 
+							+ "\n6 - Realocar caixa"
+							+ "\n0 - Sair");
+					opcao = scInt.nextInt();
 					if (opcao == -1)
 						break gerenteMenu;
 
@@ -91,14 +93,17 @@ public class Main {
 					case 5:
 						g1.getEstoqueControl().encomendaProdutoJaExistente();
 						break;
+					case 6:
+						g1.getSupermercadoControl().realocarVendedorCaixa();
+						break;
 					case 0:
 						break gerenteMenu;
 					default:
 						break;
 					}
 				}
-			case 0:
-				statusMenu = false;
+			
+			default:
 				break;
 			}
 		}
