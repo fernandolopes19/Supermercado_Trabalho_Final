@@ -49,58 +49,14 @@ public class Supermercado {
     public void registrarEstoque(Estoque estoque) {
     	this.estoque = estoque;
     }
-/*
-    public void encomendaProdutoNovo() {
-        Scanner scStr = new Scanner(System.in);
-        Scanner scDouble = new Scanner(System.in);
-        Scanner scInt = new Scanner(System.in);
-
-        System.out.println("Nome do produto: ");
-        String nomeProduto = scStr.nextLine();
-
-        if (!estoque.isProdutoNoEstoque(nomeProduto)) {
-            // codProduto ser√° 1 a mais do √∫ltimo
-            int listaTamanho = estoque.getListaProduto().size();
-            int codProduto = estoque.getListaProduto().get(listaTamanho).getCodProduto() + 1;
-
-            System.out.println("Pre√ßo do Produto: ");
-            double precoProduto = scDouble.nextDouble();
-
-            System.out.println("Quantidade do Produto Adquirido: ");
-            int qtdeProduto = scInt.nextInt();
-            
-            EnumProdutoTipo enumTipo = EnumProdutoTipo.UNITARIO;
-            System.out.println("Tipo (KG ou UN");
-            String tipo = scStr.nextLine();
-            if(tipo.toUpperCase().equals("KG")) {
-            	enumTipo = EnumProdutoTipo.POR_KG;
-            }
-            if(tipo.toUpperCase().equals("UN")) {
-            	enumTipo = EnumProdutoTipo.UNITARIO;
-            }
-
-            Produto produto = new Produto(nomeProduto, codProduto, precoProduto, qtdeProduto, enumTipo);
-            estoque.adicionaProduto(produto);
-        }
-        
-        scStr.close();
-        scDouble.close();
-        scInt.close();
+    
+    public void consultarProdutoLeitor(int codigo) {
+    	try {
+        	this.listaLeitores.get(0).verificaPrecoProduto(codigo);
+    	} catch (Exception e) {
+			System.out.println("N„o h· leitores disponÌveis");
+		}
     }
-
-    public void encomendaProdutoJaExistente() {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println("Nome do produto: ");
-        String nomeProduto = sc.nextLine();
-        if (this.estoque.isProdutoNoEstoque(nomeProduto)) {
-            System.out.println("Quantidade do Produto Adquirido: ");
-            int qtdeProduto = sc.nextInt();
-
-            this.estoque.retornarProdutoProEstoque(nomeProduto, qtdeProduto);
-        }
-        sc.close();
-    }*/
     
     public Caixa retornaCaixaDisponivel() {
     	for(Caixa c : this.listaCaixas) {

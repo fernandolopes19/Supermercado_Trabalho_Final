@@ -35,7 +35,11 @@ public class Main {
 				clientMenu: while (true) {
 					System.out.print("\n\n");
 					System.out.println("Ola, " + c1.getNome() + ". Selecione uma acao:");
-					System.out.println("1 - Adicionar produto" + "\n2 - Ver carrinho" +  "\n3 - Pagar" + "\n0 - Sair");
+					System.out.println("1 - Adicionar produto" 
+							+ "\n2 - Ver carrinho" 
+							+ "\n3 - Pagar" 
+							+ "\n4 - Consultar produto no leitor"
+							+ "\n0 - Sair");
 					opcao = scInt.nextInt();
 					if (opcao == -1)
 						break clientMenu;
@@ -55,6 +59,12 @@ public class Main {
 							System.out.println("Nenhum caixa disponível. Por favor, aguarde!");
 						}
 						break;
+					case 4: 
+						System.out.println("Digite o codigo do produto");
+						int codigo = scInt.nextInt();
+						mercado.consultarProdutoLeitor(codigo);
+						
+						break;
 					case 0:
 						break clientMenu;
 					default:
@@ -63,6 +73,7 @@ public class Main {
 				}
 				break;
 			case 2:
+				// Label do loop, assim podemos interromper dentro do switch
 				gerenteMenu: while (true) {
 					System.out.print("\n\n\n");
 					System.out.println("Ola, " + g1.getNome() + ". Selecione uma acao:");
@@ -110,7 +121,6 @@ public class Main {
 				break;
 			}
 		}
-		// Label do loop, assim podemos interromper dentro do switch
 
 	}
 }

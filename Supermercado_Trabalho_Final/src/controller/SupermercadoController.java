@@ -41,6 +41,8 @@ public class SupermercadoController {
 		//Caixa c1 = new Caixa(f1, mercado);
 		//Caixa c2 = new Caixa(f2, mercado);
 		//Caixa c3 = new Caixa(f3, mercado);
+		
+		mercado.registrarLeitor(new Leitor(mercado.getEstoque()));
 
 		mercado.registrarCaixa(new Caixa(v1, mercado, 1));
 		mercado.registrarCaixa(new Caixa(v2, mercado, 2));

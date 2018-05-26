@@ -1,6 +1,6 @@
 package model;
 
-public class Funcionario extends Pessoa {
+public abstract class Funcionario extends Pessoa {
 
 	private int idFuncionario;
 	private double salario;
